@@ -5,10 +5,16 @@ using System.IO;
 
 public class UProtobuf : ModuleRules
 {
-    private string LibProtoPathR
+    private string LibProtoForWinPathR
     {
         get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/lib/Release/libprotobuf.lib")); }
     }
+
+    private string LibProtoForLinuxPathR
+    {
+        get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/lib/Release/protobuf.a")); }
+    }
+
     private string HeaderPath
     {
         get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/include")); }
@@ -60,9 +66,12 @@ public class UProtobuf : ModuleRules
 
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
-            PublicAdditionalLibraries.Add(LibProtoPathR);
+            PublicAdditionalLibraries.Add(LibProtoForWinPathR);
         }
-
+        else if (Target.Platform == UnrealTargetPlatform.Linux)
+        {
+            PublicAdditionalLibraries.Add(LibProtoForLinuxPathR);
+        }
         bEnableUndefinedIdentifierWarnings = false;
         bEnableShadowVariableWarnings = false;
     }
