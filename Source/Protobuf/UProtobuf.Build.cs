@@ -12,7 +12,7 @@ public class UProtobuf : ModuleRules
 
     private string LibProtoForLinuxPathR
     {
-        get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/lib/Release/protobuf.a")); }
+        get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/lib/Release/libprotobuf.a")); }
     }
 
     private string HeaderPath
