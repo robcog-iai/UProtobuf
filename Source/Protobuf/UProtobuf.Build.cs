@@ -22,8 +22,15 @@ public class UProtobuf : ModuleRules
 
     public UProtobuf(ReadOnlyTargetRules Target) : base(Target)
 	{
+		// We are just setting up paths for pre-compiled binaries.
+		//Type = ModuleType.External;
+
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
+
+		bEnableUndefinedIdentifierWarnings = false;
+		bEnableShadowVariableWarnings = false;
+		//bEnableExceptions = true;
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
@@ -72,7 +79,6 @@ public class UProtobuf : ModuleRules
         {
             PublicAdditionalLibraries.Add(LibProtoForLinuxPathR);
         }
-        bEnableUndefinedIdentifierWarnings = false;
-        bEnableShadowVariableWarnings = false;
+
     }
 }
