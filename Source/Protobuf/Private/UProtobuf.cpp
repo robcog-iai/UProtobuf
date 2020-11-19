@@ -1,4 +1,4 @@
-// Copyright 2017-2020, Institute for Artificial Intelligence - University of Bremen
+// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #include "UProtobuf.h"
 
@@ -13,6 +13,8 @@ void FUProtobufModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
+
+	// Free the dll handle
 }
 
 #undef LOCTEXT_NAMESPACE

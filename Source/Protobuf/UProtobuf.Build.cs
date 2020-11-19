@@ -5,25 +5,22 @@ using System.IO;
 
 public class UProtobuf : ModuleRules
 {
-	// Path to third party folder
-	private string ThirdPartyPath
-	{
-		get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "ThirdParty")); }
-	}
-
-	// Path to include directories
-    private string HeaderPath
+    private string LibProtoForWinPathR
     {
-        get { return Path.GetFullPath(Path.Combine(ModuleDirectory, ThirdPartyPath, "include")); }
+        get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/lib/Release/libprotobuf.lib")); }
     }
 
-	// Path to messages
-	private string MsgsPath
-	{
-		get { return Path.GetFullPath(Path.Combine(ModuleDirectory, ThirdPartyPath, "proto")); }
-	}
+    private string LibProtoForLinuxPathR
+    {
+        get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/lib/Release/libprotobuf.a")); }
+    }
 
-	public UProtobuf(ReadOnlyTargetRules Target) : base(Target)
+    private string HeaderPath
+    {
+        get { return Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty/include")); }
+    }
+
+    public UProtobuf(ReadOnlyTargetRules Target) : base(Target)
 	{
 		// We are just setting up paths for pre-compiled binaries.
 		//Type = ModuleType.External;
@@ -37,18 +34,16 @@ public class UProtobuf : ModuleRules
 		PublicIncludePaths.AddRange(
 			new string[] {
 				// ... add public include paths required here ...
-                HeaderPath,
-				MsgsPath,
-			}
+                HeaderPath
+            }
 			);
 				
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
                 // ... add other private include paths required here ...
-                HeaderPath,
-				MsgsPath,
-			}
+                HeaderPath
+            }
 			);
 			
 		
@@ -76,19 +71,14 @@ public class UProtobuf : ModuleRules
 			}
 			);
 
-
         if (Target.Platform == UnrealTargetPlatform.Win64)
         {
-			// .lib
-			string LibsDir = Path.Combine(ModuleDirectory, ThirdPartyPath, "lib", "Release");
-			PublicAdditionalLibraries.Add(Path.Combine(LibsDir, "libprotobuf.lib"));
-
-		}
+            PublicAdditionalLibraries.Add(LibProtoForWinPathR);
+        }
         else if (Target.Platform == UnrealTargetPlatform.Linux)
         {
-			// .lib
-			string LibsDir = Path.Combine(ModuleDirectory, ThirdPartyPath, "lib", "Release");
-			PublicAdditionalLibraries.Add(Path.Combine(LibsDir, "libprotobuf.a"));
-		}
+            PublicAdditionalLibraries.Add(LibProtoForLinuxPathR);
+        }
+
     }
 }
