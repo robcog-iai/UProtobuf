@@ -28,7 +28,8 @@ public class UProtobuf : ModuleRules
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		bEnableUndefinedIdentifierWarnings = false;
-		bEnableShadowVariableWarnings = false;
+		//bEnableShadowVariableWarnings = false;
+        ShadowVariableWarningLevel = WarningLevel.Warning;
 		//bEnableExceptions = true;
 
 		PublicIncludePaths.AddRange(
